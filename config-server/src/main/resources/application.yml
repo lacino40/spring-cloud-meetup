@@ -12,11 +12,11 @@ spring:
       server:
         git:
           # URL of the Git Repository
-          uri:  https://github.com/ryanjbaxter/beginners-guide-to-spring-cloud
+          uri:  https://github.com/lacino40/spring-cloud-meetup
           # Subdirectories of the repository (if any)
-          searchPaths: beginners-guide-to-spring-cloud-config
+          searchPaths: configuration-store
           # Branch name
-          default-label: master
+          default-label: main
           #username: Git username (if required)
           #password: Git password Or Personal Access Token (if required)
 
