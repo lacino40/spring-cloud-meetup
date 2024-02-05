@@ -1,0 +1,12 @@
+service:
+  location:
+    cities:
+      - id: 1
+        name: London
+        query: London,uk
+      - id: 2
+        name: Paris
+        query: Paris,fr
+#      - id: 3
+#        name: Kosice
+#        query: Kosice,sk
