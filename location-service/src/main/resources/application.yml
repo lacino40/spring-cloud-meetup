@@ -1,0 +1,6 @@
+service:
+  location:
+    cities:
+      - id: 1
+        name: London
+        query: London,uk
