@@ -11,12 +11,4 @@ import java.util.Set;
 @ConfigurationProperties("service.location")
 public class LocationProperties {
     private Set<CityDto> cities;
-
-    @Getter
-    @Setter
-    public static class CityDto {
-        private Long id;
-        private String name;
-        private String query;
-    }
 }
