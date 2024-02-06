@@ -8,7 +8,11 @@ spring:
       discovery:
         service-id: config-server
         enabled: true
-      fail-fast: true
+      fail-fast: false
+
+#eureka:
+#  client:
+#    registerWithEureka: false
 
 #service:
 #  location:
