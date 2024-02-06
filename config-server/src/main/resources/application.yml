@@ -19,9 +19,6 @@ spring:
           default-label: main
           #username: Git username (if required)
           #password: Git password Or Personal Access Token (if required)
-      discovery:
-        enabled: true
-        service-id: config-server
 
 eureka:
   client:
