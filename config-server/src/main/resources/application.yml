@@ -5,10 +5,12 @@ spring:
   application:
     name: config-server
   profiles:
-    active: git
+    active: native
   cloud:
     config:
       server:
+        native:
+          search-locations: file:./configuration-store
         git:
           # URL of the Git Repository
           uri:  https://github.com/lacino40/spring-cloud-meetup
