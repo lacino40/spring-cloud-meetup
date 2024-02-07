@@ -1,5 +1,4 @@
 server:
-  # Port for Config Server
   port: 8888
 
 spring:
