@@ -4,6 +4,15 @@
     <title>Forecast</title>
 </head>
 <body>
-Forecast
+<form action="/submitForm" method="post">
+    <label for="selectOption">Select an option:</label>
+    <select id="selectOption" name="selectedOption">
+        <!--/*@thymesVar id="options" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
+        <!--/*@thymesVar id="value" type="com.sonalake.meetup.service.web.dto.ComboOption.value"*/-->
+        <!--/*@thymesVar id="text" type="com.sonalake.meetup.service.web.dto.ComboOption.text"*/-->
+        <option th:each="option : ${options}" th:value="${option.value}" th:text="${option.text}"></option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>
