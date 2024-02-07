@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@AllArgsConstructor
 @Controller
+@AllArgsConstructor
 public class WebController {
     private final ForecastService forecastService;
 
     @GetMapping("/forecast")
-    public String getMainPage(Model model) {
+    public String getPage(Model model) {
 
         return forecastService
                 .addCitiesToModel(model)
