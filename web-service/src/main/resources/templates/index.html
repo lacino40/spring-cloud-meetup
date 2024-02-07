@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Forecast</title>
+    <title>Weather Forecast</title>
 </head>
 <body>
-<form action="/submitForm" method="post">
-    <label for="selectOption">Select an option:</label>
-    <select id="selectOption" name="selectedOption">
+<form action="/submit" method="post">
+    <label for="cityOption">Cities</label>
+    <select id="cityOption" name="selectedCity">
         <!--/*@thymesVar id="options" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
         <!--/*@thymesVar id="value" type="com.sonalake.meetup.service.web.dto.ComboOption.value"*/-->
         <!--/*@thymesVar id="text" type="com.sonalake.meetup.service.web.dto.ComboOption.text"*/-->
         <option th:each="option : ${options}" th:value="${option.value}" th:text="${option.text}"></option>
-    </select><br><br>
-    <input type="submit" value="Submit">
+    </select>
+    <input type="submit" value="Forecast">
 </form>
 </body>
 </html>
