@@ -13,8 +13,11 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.TreeSet;
 
+import static java.util.Comparator.comparingLong;
 import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toSet;
 
 @AllArgsConstructor
@@ -51,8 +54,9 @@ public class ForecastServiceImpl implements ForecastService {
 
         return Arrays
                 .stream(requireNonNull(response.getBody()))
+                .collect(toCollection(() -> new TreeSet<>(comparingLong(CityDto::getId))))
+                .stream()
                 .map(cityDto -> ComboOption.of(cityDto.getName(), cityDto.getQuery()))
                 .collect(toSet());
-
     }
 }
