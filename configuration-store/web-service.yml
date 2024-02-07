@@ -2,6 +2,10 @@ spring:
   thymeleaf:
     cache: false
 
+eureka:
+  client:
+    registerWithEureka: false
+
 service:
   web:
     service-urls:
