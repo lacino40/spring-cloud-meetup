@@ -11,17 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Set;
-import java.util.TreeSet;
 
-import static java.util.Comparator.comparingLong;
 import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toSet;
+import static org.apache.commons.lang.StringUtils.isBlank;
 
 @AllArgsConstructor
-public class ForecastServiceImpl implements ForecastService {
+public class ForecastServiceImpl extends ForecastUtility implements ForecastService {
     private static URI CITIES_URI;
     private final RestTemplate restTemplate;
     private final WebProperties webProperties;
@@ -35,12 +32,17 @@ public class ForecastServiceImpl implements ForecastService {
     public ForecastService addCitiesToModel(Model model) {
         Set<ComboOption> citiesComboOptions = getCitiesComboOptions();
 
-        model.addAttribute("options", citiesComboOptions);
+        model.addAttribute("cityOptions", citiesComboOptions);
         return this;
     }
 
     @Override
     public ForecastService addForecastToModel(Model model) {
+        String selectedCity = (String) model.asMap().get("selectedCity");
+
+        model.addAttribute("isCitySelected", isBlank(selectedCity));
+        model.addAttribute("selectedCity", selectedCity);
+
         return this;
     }
 
@@ -52,11 +54,8 @@ public class ForecastServiceImpl implements ForecastService {
     private Set<ComboOption> getCitiesComboOptions() {
         ResponseEntity<CityDto[]> response = restTemplate.getForEntity(CITIES_URI, CityDto[].class);
 
-        return Arrays
-                .stream(requireNonNull(response.getBody()))
-                .collect(toCollection(() -> new TreeSet<>(comparingLong(CityDto::getId))))
-                .stream()
-                .map(cityDto -> ComboOption.of(cityDto.getName(), cityDto.getQuery()))
+        return sortCitiesById(requireNonNull(response.getBody()))
+                .map(this::toComboOption)
                 .collect(toSet());
     }
 }
