@@ -1,3 +1,8 @@
 spring:
   thymeleaf:
     cache: false
+
+service:
+  web:
+    service-urls:
+      location-service: localhost:8082/location
