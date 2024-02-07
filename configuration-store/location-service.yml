@@ -1,3 +1,7 @@
+server:
+  # Port for Location Service
+  port: 8082
+
 service:
   location:
     cities:
