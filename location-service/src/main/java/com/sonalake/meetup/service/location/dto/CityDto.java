@@ -1,10 +1,8 @@
 package com.sonalake.meetup.service.location.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class CityDto {
     private Long id;
     private String name;

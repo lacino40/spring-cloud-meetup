@@ -1,14 +1,12 @@
 package com.sonalake.meetup.service.location;
 
 import com.sonalake.meetup.service.location.dto.CityDto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @ConfigurationProperties("service.location")
 public class LocationProperties {
     private Set<CityDto> cities;
