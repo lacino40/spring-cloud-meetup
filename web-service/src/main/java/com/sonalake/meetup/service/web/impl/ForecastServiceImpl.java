@@ -29,10 +29,21 @@ public class ForecastServiceImpl implements ForecastService {
     }
 
     @Override
-    public void addCitiesToModel(Model model) {
+    public ForecastService addCitiesToModel(Model model) {
         Set<ComboOption> citiesComboOptions = getCitiesComboOptions();
 
         model.addAttribute("options", citiesComboOptions);
+        return this;
+    }
+
+    @Override
+    public ForecastService addForecastToModel(Model model) {
+        return this;
+    }
+
+    @Override
+    public String template(String templateName) {
+        return templateName;
     }
 
     private Set<ComboOption> getCitiesComboOptions() {
