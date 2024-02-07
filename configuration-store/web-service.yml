@@ -2,6 +2,11 @@ spring:
   thymeleaf:
     cache: false
 
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
+
 eureka:
   client:
     registerWithEureka: false
