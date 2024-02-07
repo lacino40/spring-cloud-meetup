@@ -1,4 +1,4 @@
-package com.sonalake.meetup.service.location;
+package com.sonalake.meetup.service.location.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,5 +1,6 @@
 package com.sonalake.meetup.service.location;
 
+import com.sonalake.meetup.service.location.dto.CityDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
