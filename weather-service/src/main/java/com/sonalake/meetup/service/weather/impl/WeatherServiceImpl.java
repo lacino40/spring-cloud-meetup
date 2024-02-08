@@ -2,9 +2,11 @@ package com.sonalake.meetup.service.weather.impl;
 
 import com.sonalake.meetup.service.weather.WeatherProperties;
 import com.sonalake.meetup.service.weather.WeatherService;
-import com.sonalake.meetup.service.weather.dto.WeatherDto;
+import com.sonalake.meetup.service.weather.dto.OpenWeatherDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
 
 @AllArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
@@ -12,7 +14,9 @@ public class WeatherServiceImpl implements WeatherService {
     private final WeatherProperties weatherProperties;
 
     @Override
-    public WeatherDto getWeather(String query) {
-        return new WeatherDto();
+    public OpenWeatherDto getWeather(String query) {
+        URI openWeatherUrl = weatherProperties.getOpenWeatherUrl(query);
+
+        return restTemplate.getForObject(openWeatherUrl, OpenWeatherDto.class);
     }
 }
