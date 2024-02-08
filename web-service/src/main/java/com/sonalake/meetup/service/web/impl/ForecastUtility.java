@@ -4,22 +4,19 @@ import com.sonalake.meetup.service.web.dto.CityDto;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 
 import java.util.Arrays;
-import java.util.TreeSet;
-import java.util.stream.Stream;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import static java.util.Comparator.comparingLong;
 import static java.util.stream.Collectors.toCollection;
 
 public abstract class ForecastUtility {
-    protected Stream<CityDto> sortCitiesById(CityDto[] cityDTOs) {
+
+    protected Set<ComboOption> getCitiesComboOptions(CityDto[] cityDTOs) {
+
         return Arrays
                 .stream(cityDTOs)
-                .collect(toCollection(this::sortedByCityId))
-                .stream();
-    }
-
-    private TreeSet<CityDto> sortedByCityId() {
-        return new TreeSet<>(comparingLong(CityDto::getId));
+                .map(this::toComboOption)
+                .collect(toCollection(LinkedHashSet::new));
     }
 
     protected ComboOption toComboOption(CityDto cityDto) {
