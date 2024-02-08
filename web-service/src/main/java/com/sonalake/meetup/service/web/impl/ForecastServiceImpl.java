@@ -2,8 +2,8 @@ package com.sonalake.meetup.service.web.impl;
 
 import com.sonalake.meetup.service.web.ForecastService;
 import com.sonalake.meetup.service.web.WebProperties;
-import com.sonalake.meetup.service.web.dto.CityDto;
 import com.sonalake.meetup.service.web.dto.ComboOption;
+import com.sonalake.meetup.service.web.dto.LocationDto;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,31 +18,33 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 
 @AllArgsConstructor
 public class ForecastServiceImpl extends ForecastUtility implements ForecastService {
-    private static URI CITIES_URI;
+    private static URI LOCATION_URI;
+    private static URI WEATHER_URI;
     private final RestTemplate restTemplate;
     private final WebProperties webProperties;
 
     @PostConstruct
     public void intUrls() {
-        CITIES_URI = webProperties.getLocationUrlFor("cities");
+        LOCATION_URI = webProperties.getLocationUrl();
+        WEATHER_URI = webProperties.getWeatherUrl();
     }
 
     @Override
     public ForecastService addCitiesToModel(Model model) {
-        ResponseEntity<CityDto[]> response = restTemplate.getForEntity(CITIES_URI, CityDto[].class);
-        Set<ComboOption> citiesComboOptions = getCitiesComboOptions(requireNonNull(response.getBody()));
+        ResponseEntity<LocationDto[]> response = restTemplate.getForEntity(LOCATION_URI, LocationDto[].class);
+        Set<ComboOption> locationsComboOptions = locationsComboOptions(requireNonNull(response.getBody()));
 
-        model.addAttribute("cityOptions", citiesComboOptions);
+        model.addAttribute("locationsOptions", locationsComboOptions);
 
         return this;
     }
 
     @Override
     public ForecastService addForecastToModel(Model model) {
-        String selectedCity = (String) model.asMap().get("selectedCity");
+        String selectedLocation = (String) model.asMap().get("selectedLocation");
 
-        model.addAttribute("isCitySelected", isBlank(selectedCity));
-        model.addAttribute("selectedCity", selectedCity);
+        model.addAttribute("isLocationSelected", isBlank(selectedLocation));
+        model.addAttribute("selectedLocation", selectedLocation);
 
         return this;
     }

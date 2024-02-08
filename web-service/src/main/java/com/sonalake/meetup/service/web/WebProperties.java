@@ -11,9 +11,13 @@ import java.util.Map;
 public class WebProperties {
     private Map<String, String> serviceUrls;
 
-    public URI getLocationUrlFor(String path) {
+    public URI getLocationUrl() {
         return URI
-                .create(serviceUrls.get("location-service"))
-                .resolve(path);
+                .create(serviceUrls.get("location-service"));
+    }
+
+    public URI getWeatherUrl() {
+        return URI
+                .create(serviceUrls.get("weather-service"));
     }
 }

@@ -4,17 +4,17 @@
     <title>Weather Forecast</title>
 </head>
 <body>
-<form action="/submit" method="post">
-    <label for="cityOption">Cities</label>
-    <select id="cityOption" name="selectedCity">
-        <!--/*@thymesVar id="cityOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
+<form action="/forecast/submit" method="post">
+    <label for="locationOption">Locations</label>
+    <select id="locationOption" name="selectedLocation">
+        <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
         <!--/*@thymesVar id="value" type="com.sonalake.meetup.service.web.dto.ComboOption.value"*/-->
         <!--/*@thymesVar id="text" type="com.sonalake.meetup.service.web.dto.ComboOption.text"*/-->
-        <option th:each="option : ${cityOptions}" th:value="${option.value}" th:text="${option.text}"></option>
+        <option th:each="option : ${locationsOptions}" th:value="${option.value}" th:text="${option.text}"></option>
     </select>
     <input type="submit" value="Forecast">
 </form>
-<p><!--/*@thymesVar id="selectedCity" type="java"*/-->
-    <strong th:text="${selectedCity}"></strong></p>
+<p><!--/*@thymesVar id="selectedLocation" type="string"*/-->
+    <strong th:text="${selectedLocation}"></strong></p>
 </body>
 </html>
