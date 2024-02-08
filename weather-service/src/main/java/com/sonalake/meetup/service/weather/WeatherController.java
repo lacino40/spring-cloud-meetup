@@ -1,6 +1,6 @@
 package com.sonalake.meetup.service.weather;
 
-import com.sonalake.meetup.service.weather.dto.WeatherDto;
+import com.sonalake.meetup.service.weather.dto.OpenWeatherDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ public class WeatherController {
     private final WeatherService weatherService;
 
     @GetMapping
-    public WeatherDto getWeather(@RequestParam String query) {
+    public OpenWeatherDto getWeather(@RequestParam String query) {
 
         return weatherService.getWeather(query);
     }
