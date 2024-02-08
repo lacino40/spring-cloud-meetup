@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableConfigurationProperties(WebProperties.class)
 @EnableDiscoveryClient
+@EnableConfigurationProperties(WebProperties.class)
 public class WebServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(WebServiceApplication.class, args);
