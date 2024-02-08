@@ -15,3 +15,4 @@ service:
   web:
     service-urls:
       location-service: http://localhost:8082/location/
+      weather-service: http://localhost:8084/weather/
