@@ -8,7 +8,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/location")
-public class LocationController {
+public class LocationController extends LocationUtility {
     private final LocationProperties locationProperties;
 
     public LocationController(LocationProperties locationProperties) {
@@ -17,6 +17,9 @@ public class LocationController {
 
     @RequestMapping("/cities")
     public Set<CityDto> getCities() {
-        return locationProperties.getCities();
+
+        return sortCitiesById(
+                locationProperties.getCities()
+        );
     }
 }
