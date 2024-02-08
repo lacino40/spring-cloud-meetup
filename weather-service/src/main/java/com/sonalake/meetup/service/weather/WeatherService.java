@@ -1,7 +1,7 @@
 package com.sonalake.meetup.service.weather;
 
-import com.sonalake.meetup.service.weather.dto.WeatherDto;
+import com.sonalake.meetup.service.weather.dto.OpenWeatherDto;
 
 public interface WeatherService {
-    WeatherDto getWeather(String query);
+    OpenWeatherDto getWeather(String query);
 }
