@@ -4,7 +4,7 @@ server:
 
 service:
   location:
-    cities:
+    locations:
       - id: 1
         name: London
         query: London,uk
