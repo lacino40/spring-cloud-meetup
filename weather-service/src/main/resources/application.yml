@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: weather-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      discovery:
+        service-id: config-server
+        enabled: true

@@ -1,0 +1,3 @@
+server:
+  # Port for Weather Service
+  port: 8084
