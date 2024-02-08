@@ -1,6 +1,7 @@
 package com.sonalake.meetup.service.location;
 
 import com.sonalake.meetup.service.location.dto.CityDto;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class LocationController extends LocationUtility {
         this.locationProperties = locationProperties;
     }
 
-    @RequestMapping("/cities")
+    @GetMapping("/cities")
     public Set<CityDto> getCities() {
 
         return sortCitiesById(
