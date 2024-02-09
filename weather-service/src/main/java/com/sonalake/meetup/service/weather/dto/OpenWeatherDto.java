@@ -9,14 +9,21 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenWeatherDto {
     private List<Weather> weather;
+    private Weather displayWeather;
     private Main main;
     private Wind wind;
     private String name;
     private String visibility;
 
+    public Weather getDisplayWeather() {
+        return  weather.stream()
+                .findFirst()
+                .orElse(null);
+    }
+
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Weather {
+    public static class Weather {
         private Long id;
         private String main;
         private String description;
