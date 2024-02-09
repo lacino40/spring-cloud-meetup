@@ -2,19 +2,64 @@
 <html lang="en">
 <head>
     <title>Weather Forecast</title>
+    <style>
+        .card {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card img {
+            width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .card-text {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
 <form action="/forecast/submit" method="post">
     <label for="locationOption">Locations</label>
     <select id="locationOption" name="selectedLocation">
         <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
-        <!--/*@thymesVar id="value" type="com.sonalake.meetup.service.web.dto.ComboOption.value"*/-->
-        <!--/*@thymesVar id="text" type="com.sonalake.meetup.service.web.dto.ComboOption.text"*/-->
-        <option th:each="option : ${locationsOptions}" th:value="${option.value}" th:text="${option.text}"></option>
+        <!--/*@thymesVar id="value" type="string"*/-->
+        <!--/*@thymesVar id="text" type="string"*/-->
+        <!--/*@thymesVar id="selectedLocation" type="string"*/-->
+        <option th:each="option : ${locationsOptions}"
+                th:text="${option.text}"
+                th:value="${option.value}"
+                th:selected="${option.value == selectedLocation}"></option>
     </select>
     <input type="submit" value="Forecast">
 </form>
-<p><!--/*@thymesVar id="selectedLocation" type="string"*/-->
-    <strong th:text="${selectedLocation}"></strong></p>
+
+<!--/*@thymesVar id="showWeatherDetails" type="boolean"*/-->
+<div th:if="${showWeatherDetails}" class="card">
+    <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Your Image">
+    <div class="card-text">
+        <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+            <strong th:text="${weatherDto.name}"></strong>
+            <span th:text="${weatherDto.main.temp.intValue}"></span>&deg;C<br/>
+        </p>
+        <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+            <span th:text="${weatherDto.displayWeather.main}"></span>,
+            <span th:text="${weatherDto.displayWeather.description}"></span><br/>
+        </p>
+        <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+            feels like:
+            <span th:text="${weatherDto.main.feels_like.intValue}"></span>&deg;C<br>
+            pressure:
+            <span th:text="${weatherDto.main.pressure}"></span>hPa<br>
+            humidity:
+            <span th:text="${weatherDto.main.humidity}"></span>%<br>
+            visibility:
+            <span th:text="${weatherDto.visibility}"></span>m<br/>
+            wind
+            <span th:text="${weatherDto.wind.speed.intValue}"></span>m/s<br/></p>
+    </div>
+</div>
 </body>
 </html>
