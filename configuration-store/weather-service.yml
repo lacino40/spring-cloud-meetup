@@ -15,3 +15,6 @@ service:
 
       # If no API key is provided, the application will use mocked data
       api-key:
+      # The mock-filename property is a fail-safe mechanism utilized in the application in case the API key is not
+      # provided or there's an issue with the API key
+      mock-filename: open-weather-mock.json
