@@ -11,6 +11,6 @@ service:
       - id: 2
         name: Paris
         query: Paris,fr
-#      - id: 3
-#        name: Kosice
-#        query: Kosice,sk
+      - id: 3
+        name: Kosice
+        query: Kosice,sk
