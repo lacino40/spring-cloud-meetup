@@ -6,6 +6,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 @Data
 @ConfigurationProperties("service.weather.open-weather")
 public class WeatherProperties {
@@ -13,9 +15,16 @@ public class WeatherProperties {
     private String version;
     private String unit;
     private String apiKey;
+    private String mockFilename;
 
     public URI getOpenWeatherUrl(String query) {
-        return UriComponentsBuilder
+        return isBlank(apiKey) ?
+
+                //build URI for open-weather mock file
+                null :
+
+                //build URI for open-weather API
+                UriComponentsBuilder
                 .fromHttpUrl(url)
                 .pathSegment(version, "weather")
                 .queryParam("q", query)
