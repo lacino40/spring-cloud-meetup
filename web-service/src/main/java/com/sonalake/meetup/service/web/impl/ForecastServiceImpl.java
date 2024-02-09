@@ -41,19 +41,19 @@ public class ForecastServiceImpl extends ForecastUtility implements ForecastServ
     @Override
     public ForecastService addForecastToModel(Model model) {
         String selectedLocation = (String) model.asMap().get("selectedLocation");
-        boolean isSelectedLocationBlank = isBlank(selectedLocation);
+        boolean emptyLocation = isBlank(selectedLocation);
 
-        model.addAttribute("isLocationSelected", isSelectedLocationBlank);
+        model.addAttribute("showWeatherDetails", !emptyLocation);
         model.addAttribute("selectedLocation", selectedLocation);
 
-        if(isSelectedLocationBlank) {
+        if(emptyLocation) {
             return this;
         }
 
         URI weatherURI = webProperties.getWeatherURI(selectedLocation);
         ResponseEntity<OpenWeatherDto> response = restTemplate.getForEntity(weatherURI, OpenWeatherDto.class);
 
-        model.addAttribute("weatherDto", requireNonNull(response));
+        model.addAttribute("weatherDto", requireNonNull(response.getBody()));
 
         return this;
     }
