@@ -4,6 +4,7 @@ import com.sonalake.meetup.service.web.ForecastService;
 import com.sonalake.meetup.service.web.WebProperties;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
+import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +20,18 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 @AllArgsConstructor
 public class ForecastServiceImpl extends ForecastUtility implements ForecastService {
     private static URI LOCATION_URI;
-    private static URI WEATHER_URI;
     private final RestTemplate restTemplate;
     private final WebProperties webProperties;
 
     @PostConstruct
     public void intUrls() {
-        LOCATION_URI = webProperties.getLocationUrl();
-        WEATHER_URI = webProperties.getWeatherUrl();
+        LOCATION_URI = webProperties.getLocationURI();
     }
 
     @Override
     public ForecastService addCitiesToModel(Model model) {
         ResponseEntity<LocationDto[]> response = restTemplate.getForEntity(LOCATION_URI, LocationDto[].class);
-        Set<ComboOption> locationsComboOptions = locationsComboOptions(requireNonNull(response.getBody()));
+        Set<ComboOption> locationsComboOptions = getLocationsComboOptions(requireNonNull(response.getBody()));
 
         model.addAttribute("locationsOptions", locationsComboOptions);
 
@@ -42,9 +41,19 @@ public class ForecastServiceImpl extends ForecastUtility implements ForecastServ
     @Override
     public ForecastService addForecastToModel(Model model) {
         String selectedLocation = (String) model.asMap().get("selectedLocation");
+        boolean isSelectedLocationBlank = isBlank(selectedLocation);
 
-        model.addAttribute("isLocationSelected", isBlank(selectedLocation));
+        model.addAttribute("isLocationSelected", isSelectedLocationBlank);
         model.addAttribute("selectedLocation", selectedLocation);
+
+        if(isSelectedLocationBlank) {
+            return this;
+        }
+
+        URI weatherURI = webProperties.getWeatherURI(selectedLocation);
+        ResponseEntity<OpenWeatherDto> response = restTemplate.getForEntity(weatherURI, OpenWeatherDto.class);
+
+        model.addAttribute("weatherDto", requireNonNull(response));
 
         return this;
     }
