@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Paths;
 
+import static java.util.Objects.requireNonNull;
+
 @AllArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
     private final RestTemplate restTemplate;
@@ -20,9 +22,15 @@ public class WeatherServiceImpl implements WeatherService {
     @Override
     public OpenWeatherDto getWeather(String query) throws IOException {
         URI openWeatherURI = weatherProperties.getOpenWeatherUrl(query);
+        String iconUrl =  weatherProperties.getIconUrl();
+        boolean isMocked = weatherProperties.isMocked();
 
-        return weatherProperties.isMocked() ?
+        OpenWeatherDto openWeatherDto =  isMocked ?
                 objectMapper.readValue(Paths.get(openWeatherURI).toFile(), OpenWeatherDto.class) :
                 restTemplate.getForObject(openWeatherURI, OpenWeatherDto.class);
+
+        return requireNonNull(openWeatherDto)
+                .withIconUrl(iconUrl)
+                .withMockFlag(isMocked);
     }
 }

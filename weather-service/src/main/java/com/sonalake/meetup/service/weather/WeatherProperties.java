@@ -13,6 +13,7 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 @ConfigurationProperties("service.weather.open-weather")
 public class WeatherProperties {
     private String url;
+    private String iconUrl;
     private String version;
     private String unit;
     private String apiKey;

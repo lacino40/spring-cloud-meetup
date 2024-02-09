@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import static java.text.MessageFormat.format;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenWeatherDto {
@@ -14,6 +16,8 @@ public class OpenWeatherDto {
     private Wind wind;
     private String name;
     private String visibility;
+    private String iconUrl;
+    private boolean mock;
 
     public Weather getDisplayWeather() {
         return  weather.stream()
@@ -43,5 +47,15 @@ public class OpenWeatherDto {
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class Wind {
         private String speed;
+    }
+
+    public OpenWeatherDto withIconUrl(String iconUrl) {
+        this.iconUrl = format(iconUrl, getDisplayWeather().getIcon());
+        return this;
+    }
+
+    public OpenWeatherDto withMockFlag(boolean mockFlag) {
+        this.mock = mockFlag;
+        return this;
     }
 }
