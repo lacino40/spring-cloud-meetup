@@ -1,10 +1,12 @@
 package com.sonalake.meetup.service.weather.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenWeatherDto {
     private List<Weather> weather;
     private Main main;
@@ -13,6 +15,7 @@ public class OpenWeatherDto {
     private String visibility;
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private static class Weather {
         private Long id;
         private String main;
@@ -21,6 +24,7 @@ public class OpenWeatherDto {
     }
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private static class Main {
         private String temp;
         private String feels_like;
@@ -29,6 +33,7 @@ public class OpenWeatherDto {
     }
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private static class Wind {
         private String speed;
     }
