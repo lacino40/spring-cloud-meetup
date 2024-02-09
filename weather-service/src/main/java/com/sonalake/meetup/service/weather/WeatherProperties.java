@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.file.Paths;
 
 import static org.apache.commons.lang.StringUtils.isBlank;
 
@@ -15,13 +16,14 @@ public class WeatherProperties {
     private String version;
     private String unit;
     private String apiKey;
-    private String mockFilename;
+    private String mockFilePath;
 
     public URI getOpenWeatherUrl(String query) {
+
         return isBlank(apiKey) ?
 
                 //build URI for open-weather mock file
-                null :
+                Paths.get(mockFilePath).toUri() :
 
                 //build URI for open-weather API
                 UriComponentsBuilder
@@ -32,5 +34,9 @@ public class WeatherProperties {
                 .queryParam("APPID", apiKey)
                 .build()
                 .toUri();
+    }
+
+    public boolean isMocked() {
+        return isBlank(apiKey);
     }
 }
