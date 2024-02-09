@@ -10,8 +10,6 @@
         }
 
         .card img {
-            width: 150px;
-            height: auto;
             margin-right: 20px;
         }
 
@@ -38,7 +36,8 @@
 
 <!--/*@thymesVar id="showWeatherDetails" type="boolean"*/-->
 <div th:if="${showWeatherDetails}" class="card">
-    <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Your Image">
+    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+    <img th:src="${weatherDto.iconUrl}" alt="weather-image">
     <div class="card-text">
         <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
             <strong th:text="${weatherDto.name}"></strong>
@@ -57,8 +56,10 @@
             <span th:text="${weatherDto.main.humidity}"></span>%<br>
             visibility:
             <span th:text="${weatherDto.visibility}"></span>m<br/>
-            wind
-            <span th:text="${weatherDto.wind.speed.intValue}"></span>m/s<br/></p>
+            wind:
+            <span th:text="${weatherDto.wind.speed.intValue}"></span>m/s<br/>
+            <span th:text="${weatherDto.mock ? 'mock':''}"></span><br/>
+        </p>
     </div>
 </div>
 </body>
