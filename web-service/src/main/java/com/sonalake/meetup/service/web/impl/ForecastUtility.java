@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toCollection;
 
 public abstract class ForecastUtility {
 
-    protected Set<ComboOption> locationsComboOptions(LocationDto[] locationDTOs) {
+    protected Set<ComboOption> getLocationsComboOptions(LocationDto[] locationDTOs) {
 
         return Arrays
                 .stream(locationDTOs)
