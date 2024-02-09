@@ -9,6 +9,8 @@ public class OpenWeatherDto {
     private Wind wind;
     private String name;
     private String visibility;
+    private String iconUrl;
+    private boolean mock;
 
     @Data
     private static class Weather {
