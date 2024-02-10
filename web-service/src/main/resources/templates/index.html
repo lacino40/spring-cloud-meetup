@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Weather Forecast</title>
-    <link href="/templates/style.css" th:href="@{/templates/style.css}" rel="stylesheet">
+    <title>Weather Service</title>
+    <link rel="stylesheet" th:href="style.css">
+    <link rel="icon" th:href="sonalake.png" />
 </head>
 <body>
-<form action="/forecast/submit" method="post">
-    <label for="locationOption">Locations</label>
-    <select id="locationOption" name="selectedLocation">
-        <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
-        <!--/*@thymesVar id="value" type="string"*/-->
-        <!--/*@thymesVar id="text" type="string"*/-->
-        <!--/*@thymesVar id="selectedLocation" type="string"*/-->
-        <option th:each="option : ${locationsOptions}"
-                th:text="${option.text}"
-                th:value="${option.value}"
-                th:selected="${option.value == selectedLocation}"></option>
-    </select>
-    <input type="submit" value="Forecast">
-</form>
+
+<!-- Top panel -->
+<div class="header">
+    <!-- Logo&Service -->
+    <div class="logo-section">
+        <img th:src="sonalake.png" alt="logo">
+        <div class="logo-label-wrapper">
+            <span class="logo-label">Weather Service</span>
+            <span class="service-tagline">by Spring cloud</span>
+        </div>
+    </div>
+
+    <!-- Location selection -->
+    <div class="controls-section">
+        <form action="/forecast/submit" method="post">
+            <label for="locationOption"></label>
+            <select id="locationOption" name="selectedLocation" class="comboBox">
+                <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
+                <!--/*@thymesVar id="value" type="string"*/-->
+                <!--/*@thymesVar id="text" type="string"*/-->
+                <!--/*@thymesVar id="selectedLocation" type="string"*/-->
+                <option th:each="option : ${locationsOptions}"
+                        th:text="${option.text}"
+                        th:value="${option.value}"
+                        th:selected="${option.value == selectedLocation}"></option>
+            </select>
+            <input type="submit" value="Forecast" class="button">
+        </form>
+    </div>
+
+</div>
+
+<!--TODO-->
+
 
 <!--/*@thymesVar id="showWeatherDetails" type="boolean"*/-->
 <div th:if="${showWeatherDetails}" class="card">
