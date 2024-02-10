@@ -1,0 +1,97 @@
+body {
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    position: relative;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-section img {
+    height: 50px;
+    width: 50px;
+}
+
+.logo-label-wrapper {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.logo-label {
+    font-size: 27px;
+    font-weight: bold;
+    margin-left: 15px;
+    white-space: nowrap;
+}
+
+.service-tagline {
+    font-size: 11px;
+    text-align: right;
+    display: block;
+}
+
+.controls-section {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.comboBox {
+    font-size: 100%;
+    margin-right: 15px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.comboBox option, .comboBox::selection {
+    color: #3b87ff;
+}
+
+.button {
+    font-size: 100%;
+    background-color: #3b87ff;
+    border-radius: 6px;
+    border-width: 0;
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
+    color: #fff;
+    height: 40px;
+    padding: 0 25px;
+    cursor: pointer;
+}
+
+
+/*TODO */
+
+.card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.card img {
+    margin-right: 20px;
+}
+
+.card-text {
+    flex: 1;
+}
