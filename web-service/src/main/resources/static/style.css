@@ -9,7 +9,7 @@ body {
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
     padding: 20px 30px;
     position: relative;
-    background: url('sun.png') no-repeat left 125px bottom -302px;
+    background: url('sun.png') no-repeat left 9% bottom 74%;
     background-size: 26%;
 }
 
