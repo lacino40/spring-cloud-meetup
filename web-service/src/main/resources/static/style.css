@@ -55,6 +55,7 @@ body {
 
 .comboBox {
     font-size: 100%;
+    color: #3b87ff;
     margin-right: 15px;
     border: none;
     outline: none;
@@ -64,7 +65,7 @@ body {
 }
 
 .comboBox option, .comboBox::selection {
-    color: #3b87ff;
+    color: black;
 }
 
 .button {
