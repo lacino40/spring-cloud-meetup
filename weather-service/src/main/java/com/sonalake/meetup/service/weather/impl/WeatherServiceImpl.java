@@ -31,6 +31,6 @@ public class WeatherServiceImpl implements WeatherService {
 
         return requireNonNull(openWeatherDto)
                 .withIconUrl(iconUrl)
-                .withMockFlag(isMocked);
+                .withMockFlag(isMocked, query);
     }
 }

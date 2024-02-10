@@ -54,8 +54,13 @@ public class OpenWeatherDto {
         return this;
     }
 
-    public OpenWeatherDto withMockFlag(boolean mockFlag) {
+    public OpenWeatherDto withMockFlag(boolean mockFlag, String query) {
         this.mock = mockFlag;
+        this.name = mock ? withNameFromQueryIfMock(query) : name;
         return this;
+    }
+
+    private String withNameFromQueryIfMock(String query) {
+        return query.split(",")[0];
     }
 }
