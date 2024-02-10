@@ -80,19 +80,73 @@ body {
 }
 
 
-/*TODO */
-
-.card {
+.card-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
 }
 
-.card img {
-    margin-right: 20px;
+.card-wrapper label {
+    font-size: 3.125rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card {
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card-text {
-    flex: 1;
+    text-align: center;
+}
+
+.card-text-big {
+    font-weight: 700;
+    font-size: 3.125rem;
+}
+
+.card-text-small {
+    font-size: 12px;
+}
+
+.card-text-item {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.image-row {
+    position: relative;
+}
+
+.mock-label {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: red;
+    font-size: 12px;
+}
+
+.color-temperature {
+    color: #A61E20;
+}
+
+.color-main {
+    color: #023687;
+}
+
+.no-mp {
+    margin: 0;
+    padding: 0;
+}
+
+.gray {
+    color: dimgray;
+}
+
+.light-gray {
+    background-color: #80808012;
 }
