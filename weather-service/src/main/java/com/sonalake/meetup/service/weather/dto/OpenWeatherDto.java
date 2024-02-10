@@ -1,11 +1,16 @@
 package com.sonalake.meetup.service.weather.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
 
 import static java.text.MessageFormat.format;
+import static java.time.Instant.ofEpochSecond;
+import static java.time.LocalDateTime.ofInstant;
+import static java.time.ZoneId.of;
+import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,14 +20,32 @@ public class OpenWeatherDto {
     private Main main;
     private Wind wind;
     private String name;
+    private Long dt;
+    private String displayTime;
     private String visibility;
     private String iconUrl;
     private boolean mock;
 
+    /**
+     * Retrieves the very first weather object to display from the list of weather objects.
+     *
+     * @return the weather object to display, or null if the list is empty
+     */
     public Weather getDisplayWeather() {
         return  weather.stream()
                 .findFirst()
                 .orElse(null);
+    }
+
+    /**
+     * Retrieves the display time in the format "HH:mm".
+     *
+     * @return the display time
+     */
+    @JsonProperty
+    public String getDisplayTime() {
+        return ofInstant(ofEpochSecond(dt), of("UTC"))
+                .format(ofPattern("HH:mm"));
     }
 
     @Data
@@ -49,11 +72,24 @@ public class OpenWeatherDto {
         private String speed;
     }
 
+    /**
+     * Sets the icon URL for the OpenWeatherDto object.
+     *
+     * @param iconUrl the URL of the icon
+     * @return the updated OpenWeatherDto object
+     */
     public OpenWeatherDto withIconUrl(String iconUrl) {
         this.iconUrl = format(iconUrl, getDisplayWeather().getIcon());
         return this;
     }
 
+    /**
+     * Updates the mock flag and the name of the OpenWeatherDto object based on the provided arguments.
+     *
+     * @param mockFlag    a boolean indicating whether the object should be mocked
+     * @param query       the query string used to update the name if the object is mocked
+     * @return the updated OpenWeatherDto object
+     */
     public OpenWeatherDto withMockFlag(boolean mockFlag, String query) {
         this.mock = mockFlag;
         this.name = mock ? withNameFromQueryIfMock(query) : name;

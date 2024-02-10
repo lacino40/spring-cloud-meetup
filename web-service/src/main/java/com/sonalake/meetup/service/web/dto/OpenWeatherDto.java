@@ -8,6 +8,7 @@ public class OpenWeatherDto {
     private Main main;
     private Wind wind;
     private String name;
+    private String displayTime;
     private String visibility;
     private String iconUrl;
     private boolean mock;
