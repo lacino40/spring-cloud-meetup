@@ -2,21 +2,7 @@
 <html lang="en">
 <head>
     <title>Weather Forecast</title>
-    <style>
-        .card {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .card img {
-            margin-right: 20px;
-        }
-
-        .card-text {
-            flex: 1;
-        }
-    </style>
+    <link href="/templates/style.css" th:href="@{/templates/style.css}" rel="stylesheet">
 </head>
 <body>
 <form action="/forecast/submit" method="post">
@@ -48,6 +34,8 @@
             <span th:text="${weatherDto.displayWeather.description}"></span><br/>
         </p>
         <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+            time:
+            <span th:text="${weatherDto.displayTime}"></span><br>
             feels like:
             <span th:text="${weatherDto.main.feels_like.intValue}"></span>&deg;C<br>
             pressure:
