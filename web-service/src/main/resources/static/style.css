@@ -95,14 +95,17 @@ body {
 
 .card {
     width: fit-content;
-    margin: 0 auto;
+    margin: 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 0 20px;
 }
 
 .card-text {
     text-align: center;
+    margin: 0 20px;
+    min-width: 200px;
 }
 
 .card-text-big {
@@ -117,6 +120,10 @@ body {
 .card-text-item {
     font-size: 1.3rem;
     font-weight: 600;
+}
+
+.card-info {
+    background-color: #80808012;
 }
 
 .image-row {
@@ -148,6 +155,14 @@ body {
     color: dimgray;
 }
 
-.light-gray {
-    background-color: #80808012;
+.rounded-corner {
+    border-radius: 10px;
+}
+
+.top-padding {
+    padding-top: 5px;
+}
+
+.bottom-padding {
+    padding-bottom: 5px;
 }

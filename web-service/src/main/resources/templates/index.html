@@ -45,7 +45,7 @@
     <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
         <label th:text="${weatherDto.name}"></label>
     </p>
-    <div class="card">
+    <div class="card rounded-corner">
         <div class="card-text">
             <p class="card-text-item no-mp">
                 <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
@@ -76,26 +76,28 @@
                 <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
                 <span th:text="${weatherDto.displayWeather.description}"></span>
             </p>
-            <p class="light-gray">
-                <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
-                <span th:text="${weatherDto.main.pressure}" class="card-text-item gray"></span> hPa<br/>
-                <span class="card-text-small gray">pressure</span>
-            </p>
-            <p class="light-gray">
-                <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
-                <span th:text="${weatherDto.main.humidity}" class="card-text-item gray"></span>%<br/>
-                <span class="card-text-small gray">humidity</span>
-            </p>
-            <p class="light-gray">
-                <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
-                <span th:text="${weatherDto.visibility}" class="card-text-item gray"></span> m<br/>
-                <span class="card-text-small gray">visibility</span>
-            </p>
-            <p class="light-gray">
-                <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
-                <span th:text="${weatherDto.wind.speed.intValue}" class="card-text-item gray"></span> m/s<br/>
-                <span class="card-text-small gray">wind</span>
-            </p>
+            <div class="card-info rounded-corner">
+                <p class="top-padding">
+                    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+                    <span th:text="${weatherDto.main.pressure}" class="card-text-item gray"></span> hPa<br/>
+                    <span class="card-text-small gray">pressure</span>
+                </p>
+                <p>
+                    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+                    <span th:text="${weatherDto.main.humidity}" class="card-text-item gray"></span>%<br/>
+                    <span class="card-text-small gray">humidity</span>
+                </p>
+                <p>
+                    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+                    <span th:text="${weatherDto.visibility}" class="card-text-item gray"></span> m<br/>
+                    <span class="card-text-small gray">visibility</span>
+                </p>
+                <p class="bottom-padding">
+                    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+                    <span th:text="${weatherDto.wind.speed.intValue}" class="card-text-item gray"></span> m/s<br/>
+                    <span class="card-text-small gray">wind</span>
+                </p>
+            </div>
         </div>
     </div>
 </div>
