@@ -101,5 +101,54 @@
         </div>
     </div>
 </div>
+
+<!--
+    empty card before selection
+-->
+<!--/*@thymesVar id="showWeatherDetails" type="boolean"*/-->
+<div th:unless="${showWeatherDetails}" class="card-wrapper">
+    <p>
+        <label class="empty-item rounded-corner">n/a n/a</label>
+    </p>
+    <div class="card rounded-corner">
+        <div class="card-text">
+            <div class="image-row">
+                <p class="no-mp">
+                    <img th:src="cloud.png" style="filter: blur(4px)" alt="weather-image">
+                </p>
+            </div>
+            <p class="card-text-big color-temperature no-mp empty-item rounded-corner">
+                <span>n/a</span>
+            </p>
+            <p class="card-text-small color-temperature no-mp empty-item-white rounded-corner">
+                <span>n/a</span>
+            </p>
+            <p class="card-text-big color-main no-mp empty-item rounded-corner">
+                <span>n/a</span>
+            </p>
+            <p class="card-text-small color-main no-mp empty-item-white rounded-corner">
+                <span>n/a</span>
+            </p>
+            <div class="card-info">
+                <p>
+                    <span class="card-text-item empty-item">n/a</span><br/>
+                    <span class="card-text-small empty-item">n/a</span>
+                </p>
+                <p>
+                    <span class="card-text-item empty-item">n/a</span><br/>
+                    <span class="card-text-small empty-item">n/a</span>
+                </p>
+                <p>
+                    <span class="card-text-item empty-item">n/a</span><br/>
+                    <span class="card-text-small empty-item">n/a</span>
+                </p>
+                <p>
+                    <span class="card-text-item empty-item">n/a</span><br/>
+                    <span class="card-text-small empty-item">n/a</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

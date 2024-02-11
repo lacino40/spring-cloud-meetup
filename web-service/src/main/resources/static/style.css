@@ -166,3 +166,17 @@ body {
 .bottom-padding {
     padding-bottom: 5px;
 }
+
+.empty-item {
+    color: #f6f6f6;
+    background-color: #f6f6f6;
+}
+
+.empty-item-white {
+    color: white;
+    background-color: white;
+}
+
+.rounded-corner {
+    border-radius: 10px;
+}
