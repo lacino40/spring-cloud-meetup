@@ -1,6 +1,10 @@
 spring:
   thymeleaf:
     cache: false
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
 
 server:
   servlet:
