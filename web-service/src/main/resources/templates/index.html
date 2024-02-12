@@ -21,11 +21,11 @@
     </div>
 
     <!-- Location selection -->
-    <div class="controls-section">
+    <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
+    <div th:if="${locationsOptions != null}" class="controls-section">
         <form action="/forecast/submit" method="post">
             <label for="locationOption"></label>
             <select id="locationOption" name="selectedLocation" class="comboBox">
-                <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
                 <!--/*@thymesVar id="value" type="string"*/-->
                 <!--/*@thymesVar id="text" type="string"*/-->
                 <!--/*@thymesVar id="selectedLocation" type="string"*/-->
@@ -112,16 +112,16 @@
         error message when weather service not available
     -->
 
-    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
-    <div th:if="${weatherDto?.isError}">
+    <!--/*@thymesVar id="isError" type="boolean"*/-->
+    <div th:if="${isError}">
         <p>
             <span class="card-text-small screen-centered gray">Oops, something went wrong</span>
-            <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
-            <span th:text="${weatherDto.errorMessage}" class="card-text-item red"></span>
+            <!--/*@thymesVar id="errorMessage" type="string"*/-->
+            <span th:text="${errorMessage}" class="card-text-item red"></span>
         </p>
     </div>
     <p>
-        <label class="empty-item rounded-corner">n/a n/a</label>
+        <label class="light-gray">city</label>
     </p>
     <div class="card rounded-corner">
         <div class="card-text">
