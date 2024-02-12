@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ConditionalOnProperty(name = "service.web.cloudy", havingValue = "false",  matchIfMissing = true)
+@ConditionalOnProperty(name = "service.web.config", havingValue = "basic",  matchIfMissing = true)
 @EnableConfigurationProperties(WebProperties.class)
 public class WebBasicConfig {
 
