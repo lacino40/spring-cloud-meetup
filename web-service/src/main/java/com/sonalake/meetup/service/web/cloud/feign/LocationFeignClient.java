@@ -1,4 +1,4 @@
-package com.sonalake.meetup.service.web.cloudy.feign;
+package com.sonalake.meetup.service.web.cloud.feign;
 
 import com.sonalake.meetup.service.web.dto.LocationDto;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -1,19 +1,16 @@
-package com.sonalake.meetup.service.web.cloudy;
+package com.sonalake.meetup.service.web.cloud.feign;
 
 import com.sonalake.meetup.service.web.ForecastService;
 import com.sonalake.meetup.service.web.WebProperties;
-import com.sonalake.meetup.service.web.cloudy.feign.LocationFeignClient;
-import com.sonalake.meetup.service.web.cloudy.feign.WeatherFeignClient;
-import com.sonalake.meetup.service.web.cloudy.feign.WeatherFeignClientFallback;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(name = "service.web.cloudy", havingValue = "true")
+@ConditionalOnProperty(name = "service.web.config", havingValue = "feign")
 @EnableConfigurationProperties(WebProperties.class)
-public class WebCloudyConfig {
+public class WebFeignConfig {
 
     @Bean
     public ForecastService forecastService(LocationFeignClient locationFeignClient,

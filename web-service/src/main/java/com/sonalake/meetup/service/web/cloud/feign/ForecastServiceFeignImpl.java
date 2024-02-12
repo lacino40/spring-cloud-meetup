@@ -1,8 +1,6 @@
-package com.sonalake.meetup.service.web.cloudy;
+package com.sonalake.meetup.service.web.cloud.feign;
 
 import com.sonalake.meetup.service.web.ForecastService;
-import com.sonalake.meetup.service.web.cloudy.feign.LocationFeignClient;
-import com.sonalake.meetup.service.web.cloudy.feign.WeatherFeignClient;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.OpenWeatherDto;

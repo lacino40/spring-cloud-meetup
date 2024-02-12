@@ -1,4 +1,4 @@
-package com.sonalake.meetup.service.web.cloudy.feign;
+package com.sonalake.meetup.service.web.cloud.feign;
 
 import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
 import org.slf4j.Logger;
