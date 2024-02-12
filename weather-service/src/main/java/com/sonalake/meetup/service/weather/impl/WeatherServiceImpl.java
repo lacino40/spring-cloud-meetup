@@ -20,7 +20,7 @@ public class WeatherServiceImpl implements WeatherService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public OpenWeatherDto getWeather(String query) throws IOException {
+    public OpenWeatherDto requestOpenWeatherApi(String query) throws IOException {
         URI openWeatherURI = weatherProperties.getOpenWeatherUrl(query);
         String iconUrl =  weatherProperties.getIconUrl();
         boolean isMocked = weatherProperties.isMocked();
