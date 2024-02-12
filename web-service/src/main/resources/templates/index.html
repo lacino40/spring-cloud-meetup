@@ -127,7 +127,8 @@
         <div class="card-text">
             <div class="image-row">
                 <p class="no-mp">
-                    <img th:src="cloud.png" style="filter: blur(4px)" alt="weather-image">
+                    <img th:unless="${weatherDto?.isError}" th:src="cloud.png" alt="weather-image">
+                    <img th:if="${weatherDto?.isError}" th:src="cloud-error.png" alt="weather-image">
                 </p>
             </div>
             <p class="card-text-big color-temperature no-mp empty-item rounded-corner">
