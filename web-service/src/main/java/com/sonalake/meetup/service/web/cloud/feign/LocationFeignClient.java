@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Feign client to retrieve locations from the discovery service
  * List all available end points here
  */
-@FeignClient("location-service")
+@FeignClient(value = "location-service", fallback = LocationFeignClientFallback.class)
 public interface LocationFeignClient {
 
     @GetMapping("/location")

@@ -22,4 +22,9 @@ public class WebFeignConfig {
     public WeatherFeignClientFallback weatherFeignClientFallback() {
         return new WeatherFeignClientFallback();
     }
+
+    @Bean
+    public LocationFeignClientFallback locationFeignClientFallback() {
+        return new LocationFeignClientFallback();
+    }
 }

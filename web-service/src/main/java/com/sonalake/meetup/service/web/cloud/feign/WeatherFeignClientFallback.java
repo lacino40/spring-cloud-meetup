@@ -11,10 +11,8 @@ public class WeatherFeignClientFallback implements WeatherFeignClient {
 
     @Override
     public OpenWeatherDto getWeather(String query) {
-        String errorMessage = "weather-service not available";
-        LOGGER.error(format("%s for query %s", errorMessage, query));
+        LOGGER.error(format("weather-service not available for query %s", query));
 
-        return new OpenWeatherDto()
-                .withError(errorMessage);
+        return new OpenWeatherDto().flagError();
     }
 }

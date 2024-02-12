@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 
 import java.util.Set;
 
+import static java.lang.Boolean.TRUE;
+import static java.util.Objects.isNull;
 import static org.apache.commons.lang.BooleanUtils.isFalse;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
@@ -23,6 +25,12 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
     @Override
     public ForecastService addCitiesToModel(Model model) {
         LocationDto[] locations = locationFeignClient.getLocations();
+
+        if(isNull(locations)) {
+            addErrorAttributes(model, "location-service not available");
+            return this;
+        }
+
         Set<ComboOption> locationsComboOptions = getLocationsComboOptions(locations);
 
         model.addAttribute("locationsOptions", locationsComboOptions);
@@ -47,11 +55,20 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         model.addAttribute("weatherDto", weather);
         model.addAttribute("showWeatherDetails", isFalse(weather.isError()));
 
+        if(weather.isError()) {
+            addErrorAttributes(model, "weather-service not available");
+        }
+
         return this;
     }
 
     @Override
     public String template(String templateName) {
         return templateName;
+    }
+
+    private void addErrorAttributes(Model model, String errorMessage) {
+        model.addAttribute("isError", TRUE);
+        model.addAttribute("errorMessage", errorMessage);
     }
 }

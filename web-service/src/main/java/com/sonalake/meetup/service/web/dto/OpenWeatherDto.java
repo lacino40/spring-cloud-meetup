@@ -1,9 +1,6 @@
 package com.sonalake.meetup.service.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import static java.util.Objects.nonNull;
 
 @Data
 public class OpenWeatherDto {
@@ -15,16 +12,17 @@ public class OpenWeatherDto {
     private String visibility;
     private String iconUrl;
     private boolean mock;
-    private String errorMessage;
+    private boolean error;
 
-    public OpenWeatherDto withError(String errorMessage) {
-        this.errorMessage = errorMessage;
+
+    /**
+     * Sets the error flag to true for the OpenWeatherDto object.
+     *
+     * @return The OpenWeatherDto object with the error flag set to true.
+     */
+    public OpenWeatherDto flagError() {
+        this.error = true;
         return this;
-    }
-
-    @JsonProperty
-    public boolean isError() {
-        return nonNull(errorMessage);
     }
 
     @Data
