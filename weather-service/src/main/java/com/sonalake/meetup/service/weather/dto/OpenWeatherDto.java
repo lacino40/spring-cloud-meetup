@@ -3,10 +3,11 @@ package com.sonalake.meetup.service.weather.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.apache.commons.lang.exception.ExceptionUtils;
 
 import java.util.List;
 
-import static java.text.MessageFormat.format;
+import static java.lang.String.format;
 import static java.time.Instant.ofEpochSecond;
 import static java.time.LocalDateTime.ofInstant;
 import static java.time.ZoneId.of;
@@ -25,6 +26,9 @@ public class OpenWeatherDto {
     private String visibility;
     private String iconUrl;
     private boolean mock;
+    private boolean error;
+    private String errorMessage;
+    private String errorStackTrace;
 
     /**
      * Retrieves the very first weather object to display from the list of weather objects.
@@ -46,6 +50,15 @@ public class OpenWeatherDto {
     public String getDisplayTime() {
         return ofInstant(ofEpochSecond(dt), of("UTC"))
                 .format(ofPattern("HH:mm"));
+    }
+
+    public static OpenWeatherDto withThrowable(Throwable throwable) {
+        OpenWeatherDto dto = new OpenWeatherDto();
+        dto.setError(true);
+        dto.setErrorMessage(format("open-weather-api is not available: %s", throwable.getMessage()));
+        dto.setErrorStackTrace(ExceptionUtils.getStackTrace(throwable));
+
+        return dto;
     }
 
     @Data
