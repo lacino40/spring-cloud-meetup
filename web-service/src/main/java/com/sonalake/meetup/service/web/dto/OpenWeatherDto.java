@@ -23,7 +23,7 @@ public class OpenWeatherDto {
     }
 
     @JsonProperty
-    public boolean hasError() {
+    public boolean isError() {
         return nonNull(errorMessage);
     }
 

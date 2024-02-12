@@ -45,7 +45,7 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
 
         model.addAttribute("weatherDto", weather);
-        model.addAttribute("showWeatherDetails", isFalse(weather.hasError()));
+        model.addAttribute("showWeatherDetails", isFalse(weather.isError()));
 
         return this;
     }
