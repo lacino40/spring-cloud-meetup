@@ -126,6 +126,12 @@ body {
     background-color: #80808012;
 }
 
+.screen-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .image-row {
     position: relative;
 }
@@ -153,6 +159,10 @@ body {
 
 .gray {
     color: dimgray;
+}
+
+.red {
+    color: #ff0000d6;
 }
 
 .rounded-corner {

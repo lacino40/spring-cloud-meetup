@@ -107,6 +107,19 @@
 -->
 <!--/*@thymesVar id="showWeatherDetails" type="boolean"*/-->
 <div th:unless="${showWeatherDetails}" class="card-wrapper">
+
+    <!--
+        error message when weather service not available
+    -->
+
+    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+    <div th:if="${weatherDto?.isError}">
+        <p>
+            <span class="card-text-small screen-centered gray">Oops, something went wrong</span>
+            <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+            <span th:text="${weatherDto.errorMessage}" class="card-text-item red"></span>
+        </p>
+    </div>
     <p>
         <label class="empty-item rounded-corner">n/a n/a</label>
     </p>
