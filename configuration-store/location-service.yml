@@ -9,8 +9,8 @@ service:
         name: Dublin
         query: Dublin,ie
       - id: 2
-        name: Paris
-        query: Paris,fr
+        name: Reykjavik
+        query: Reykjavik,is
       - id: 3
         name: Kosice
         query: Kosice,sk
