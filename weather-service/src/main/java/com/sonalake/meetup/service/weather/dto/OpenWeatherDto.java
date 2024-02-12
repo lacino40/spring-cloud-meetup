@@ -7,7 +7,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 
 import java.util.List;
 
-import static java.lang.String.format;
+import static java.text.MessageFormat.format;
 import static java.time.Instant.ofEpochSecond;
 import static java.time.LocalDateTime.ofInstant;
 import static java.time.ZoneId.of;
@@ -55,7 +55,7 @@ public class OpenWeatherDto {
     public static OpenWeatherDto withThrowable(Throwable throwable) {
         OpenWeatherDto dto = new OpenWeatherDto();
         dto.setError(true);
-        dto.setErrorMessage(format("open-weather-api is not available: %s", throwable.getMessage()));
+        dto.setErrorMessage("open-weather-api is not available");
         dto.setErrorStackTrace(ExceptionUtils.getStackTrace(throwable));
 
         return dto;
