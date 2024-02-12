@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import java.util.Set;
 
+import static org.apache.commons.lang.BooleanUtils.isFalse;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 @EnableFeignClients
@@ -34,7 +35,7 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 
-        model.addAttribute("showWeatherDetails", !emptyLocation);
+        model.addAttribute("showWeatherDetails", isFalse(emptyLocation));
         model.addAttribute("selectedLocation", selectedLocation);
 
         if(emptyLocation) {
@@ -44,6 +45,7 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
 
         model.addAttribute("weatherDto", weather);
+        model.addAttribute("showWeatherDetails", isFalse(weather.hasError()));
 
         return this;
     }

@@ -16,6 +16,7 @@ import java.net.URI;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
+import static org.apache.commons.lang.BooleanUtils.isFalse;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 @AllArgsConstructor
@@ -44,7 +45,7 @@ public class ForecastServiceBasicImpl extends ForecastServiceUtility implements 
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 
-        model.addAttribute("showWeatherDetails", !emptyLocation);
+        model.addAttribute("showWeatherDetails", isFalse(emptyLocation));
         model.addAttribute("selectedLocation", selectedLocation);
 
         if(emptyLocation) {
