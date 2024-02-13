@@ -19,8 +19,8 @@ public class WebFeignConfig {
     }
 
     @Bean
-    public WeatherFeignClientFallback weatherFeignClientFallback() {
-        return new WeatherFeignClientFallback();
+    public WeatherFeignClientFallbackFactory weatherFeignClientFallbackFactory() {
+        return new WeatherFeignClientFallbackFactory();
     }
 
     @Bean

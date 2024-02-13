@@ -6,6 +6,8 @@ import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
 import com.sonalake.meetup.service.web.util.ForecastServiceUtility;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.ui.Model;
 
@@ -19,6 +21,8 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 @EnableFeignClients
 @AllArgsConstructor
 public class ForecastServiceFeignImpl extends ForecastServiceUtility implements ForecastService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ForecastServiceFeignImpl.class);
+
     private final LocationFeignClient locationFeignClient;
     private final WeatherFeignClient webFeignClient;
 
@@ -27,7 +31,7 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         LocationDto[] locations = locationFeignClient.getLocations();
 
         if(isNull(locations)) {
-            addErrorAttributes(model, "location-service not available");
+            addErrorAttributes("location-service is not available", model, null);
             return this;
         }
 
@@ -53,10 +57,14 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
 
         model.addAttribute("weatherDto", weather);
-        model.addAttribute("showWeatherDetails", isFalse(weather.isError()));
+        model.addAttribute("showWeatherDetails", weather.isOk());
 
         if(weather.isError()) {
-            addErrorAttributes(model, "weather-service not available");
+            addErrorAttributes(
+                    "weather-service is not available",
+                    model,
+                    weather.getError().getErrorStackTrace()
+            );
         }
 
         return this;
@@ -67,8 +75,11 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         return templateName;
     }
 
-    private void addErrorAttributes(Model model, String errorMessage) {
+    private void addErrorAttributes(String errorMessage, Model model, String errorStackTrace) {
+        LOGGER.error(errorMessage);
+
         model.addAttribute("isError", TRUE);
         model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorStackTrace", errorStackTrace);
     }
 }

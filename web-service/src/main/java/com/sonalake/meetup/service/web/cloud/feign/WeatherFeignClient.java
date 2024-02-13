@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "weather-service", fallback = WeatherFeignClientFallback.class)
+@FeignClient(value = "weather-service", fallbackFactory = WeatherFeignClientFallbackFactory.class)
 public interface WeatherFeignClient {
 
     @LoadBalanced
