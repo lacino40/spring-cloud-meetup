@@ -1,5 +1,6 @@
 package com.sonalake.meetup.service.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ public class OpenWeatherDto {
     private Weather displayWeather;
     private Main main;
     private Wind wind;
+    @JsonIgnore
     private Error error;
     private String name;
     private String displayTime;
