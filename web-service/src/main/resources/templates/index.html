@@ -2,17 +2,25 @@
 <html lang="en">
 <head>
     <title>Weather Service</title>
-    <link rel="stylesheet" th:href="style.css">
-    <link rel="icon" th:href="sonalake.png" />
+    <link rel="icon" th:href="@{/img/sonalake.png}" />
+    <!-- weather application CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/http_stackpath.bootstrapcdn.com_bootstrap_4.5.0_css_bootstrap.css}">
+    <!-- jQuery first and then Bootstrap JS -->
+    <script th:src="@{/js/http_ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.js}"></script>
+    <script th:src="@{/js/http_stackpath.bootstrapcdn.com_bootstrap_4.5.0_js_bootstrap.js}"></script>
 </head>
 <body>
 
 <!-- Top panel -->
 <div class="header">
-    <!-- Logo&Service -->
+    <!--
+        Header
+    -->
     <div class="logo-section">
         <a href="/forecast">
-            <img th:src="sonalake.png" alt="logo">
+            <img th:src="@{/img/sonalake.png}" alt="logo">
         </a>
         <div class="logo-label-wrapper">
             <span class="logo-label">Weather Service</span>
@@ -20,12 +28,14 @@
         </div>
     </div>
 
-    <!-- Location selection -->
+    <!--
+        Location selection
+    -->
     <!--/*@thymesVar id="locationsOptions" type="com.sonalake.meetup.service.web.dto.ComboOption"*/-->
     <div th:if="${locationsOptions != null}" class="controls-section">
         <form action="/forecast/submit" method="post">
             <label for="locationOption"></label>
-            <select id="locationOption" name="selectedLocation" class="comboBox">
+            <select id="locationOption" name="selectedLocation" class="comboBox sonalake-color">
                 <!--/*@thymesVar id="value" type="string"*/-->
                 <!--/*@thymesVar id="text" type="string"*/-->
                 <!--/*@thymesVar id="selectedLocation" type="string"*/-->
@@ -34,11 +44,14 @@
                         th:value="${option.value}"
                         th:selected="${option.value == selectedLocation}"></option>
             </select>
-            <input type="submit" value="Forecast" class="button">
+            <input type="submit" value="Forecast" class="button sonalake-bg-color">
         </form>
     </div>
 </div>
 
+<!--
+    Main weather card
+-->
 <!--/*@thymesVar id="showWeatherDetails" type="boolean"*/-->
 <div th:if="${showWeatherDetails}" class="card-wrapper">
     <p><!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
@@ -113,10 +126,15 @@
 
     <!--/*@thymesVar id="isError" type="boolean"*/-->
     <div th:if="${isError}">
-        <p>
+        <p class="no-mp top-padding">
             <span class="card-text-small screen-centered gray">Oops, something went wrong</span>
             <!--/*@thymesVar id="errorMessage" type="string"*/-->
             <span th:text="${errorMessage}" class="card-text-item red"></span>
+            <!--/*@thymesVar id="errorStackTrace" type="string"*/-->
+            <span th:if="${errorStackTrace}"
+                  class="card-text-small screen-centered detail-link pointer red"
+                  data-toggle="modal"
+                  data-target="#errorDetailsModal">details</span>
         </p>
     </div>
     <p>
@@ -126,8 +144,10 @@
         <div class="card-text">
             <div class="image-row">
                 <p class="no-mp">
-                    <img th:unless="${weatherDto?.isError}" th:src="cloud.png" alt="weather-image">
-                    <img th:if="${weatherDto?.isError}" th:src="cloud-error.png" alt="weather-image">
+                    <!--/*@thymesVar id="weatherDto" type="com.sonalake.meetup.service.web.dto.OpenWeatherDto"*/-->
+                    <!--/*@thymesVar id="isError" type="boolean"*/-->
+                    <img th:unless="${weatherDto?.isError}" th:src="@{/img/cloud.png}" alt="weather-image">
+                    <img th:if="${weatherDto?.isError}" th:src="@{/img/cloud-error.png}" alt="weather-error-image">
                 </p>
             </div>
             <p class="card-text-big color-temperature no-mp empty-item rounded-corner">
@@ -159,6 +179,31 @@
                     <span class="card-text-item empty-item">n/a</span><br/>
                     <span class="card-text-small empty-item">n/a</span>
                 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    modal dialog to show error stack trace
+-->
+<div class="modal fade" id="errorDetailsModal" tabindex="-1" role="dialog" aria-labelledby="errorDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title red" id="errorDetailsModalLabel">Error Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--/*@thymesVar id="errorMessage" type="string"*/-->
+                <label for="errorStackTrace" th:text="${errorMessage}" class="red"></label>
+                <!--/*@thymesVar id="errorStackTrace" type="string"*/-->
+                <textarea id="errorStackTrace" class="form-control" rows="10" readonly th:text="${errorStackTrace}"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
