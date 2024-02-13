@@ -9,7 +9,7 @@ body {
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
     padding: 20px 30px;
     position: relative;
-    background: url('sun.png') no-repeat left 128px bottom -298px;
+    background: url('../img/sun.png') no-repeat left 128px bottom -298px;
     background-size: 490px;
 }
 
@@ -193,4 +193,20 @@ body {
 
 .rounded-corner {
     border-radius: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.sonalake-color {
+    color: #3b87ff;
+}
+
+.sonalake-bg-color {
+    background-color: #3b87ff;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
 }
