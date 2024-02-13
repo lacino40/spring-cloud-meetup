@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import static org.apache.commons.lang.BooleanUtils.isFalse;
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang.exception.ExceptionUtils.getStackTrace;
 
 @Data
@@ -37,11 +37,7 @@ public class OpenWeatherDto {
     }
 
     public boolean isError() {
-        return getError().isError();
-    }
-
-    public boolean isOk() {
-        return isFalse(isError());
+        return nonNull(error) && error.isError();
     }
 
     @Data
