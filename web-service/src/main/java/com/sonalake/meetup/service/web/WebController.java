@@ -19,8 +19,8 @@ public class WebController {
     public String getForecast(Model model) {
 
         return webService
-                .addCitiesToModel(model)
-                .addForecastToModel(model)
+                .addLocationsToModel(model)
+                .addWeatherToModel(model)
                 .template("index");
     }
 

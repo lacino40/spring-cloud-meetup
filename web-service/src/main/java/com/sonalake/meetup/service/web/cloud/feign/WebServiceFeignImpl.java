@@ -27,7 +27,7 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
     private final WeatherFeignClient webFeignClient;
 
     @Override
-    public WebService addCitiesToModel(Model model) {
+    public WebService addLocationsToModel(Model model) {
         LocationDto[] locations = locationFeignClient.getLocations();
 
         if(isNull(locations)) {
@@ -43,7 +43,7 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
     }
 
     @Override
-    public WebService addForecastToModel(Model model) {
+    public WebService addWeatherToModel(Model model) {
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 
@@ -55,7 +55,6 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
         }
 
         OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
-        System.out.println("@@@ after getWeather");
 
         model.addAttribute("weatherDto", weather);
         model.addAttribute("showWeatherDetails", weather.isOk());
