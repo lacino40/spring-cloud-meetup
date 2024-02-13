@@ -7,7 +7,6 @@ import com.sonalake.meetup.service.weather.dto.OpenWeatherDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Paths;
 
@@ -20,7 +19,7 @@ public class WeatherServiceImpl implements WeatherService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public OpenWeatherDto requestOpenWeatherApi(String query) throws IOException {
+    public OpenWeatherDto requestOpenWeatherApi(String query) throws Exception {
         URI openWeatherURI = weatherProperties.getOpenWeatherUrl(query);
         String iconUrl =  weatherProperties.getIconUrl();
         boolean isMocked = weatherProperties.isMocked();
