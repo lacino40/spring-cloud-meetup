@@ -9,7 +9,7 @@ public class LocationFeignClientFallback implements LocationFeignClient {
 
     @Override
     public LocationDto[] getLocations() {
-        LOGGER.error("location-service not available");
+        LOGGER.debug("location-service not available");
 
         return null;
     }
