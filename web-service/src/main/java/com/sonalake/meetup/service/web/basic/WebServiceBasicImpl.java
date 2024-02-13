@@ -8,6 +8,8 @@ import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
 import com.sonalake.meetup.service.web.util.ForecastServiceUtility;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
@@ -15,12 +17,15 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.util.Set;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.util.Objects.requireNonNull;
-import static org.apache.commons.lang.BooleanUtils.isFalse;
 import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang.exception.ExceptionUtils.getStackTrace;
 
 @AllArgsConstructor
 public class WebServiceBasicImpl extends ForecastServiceUtility implements WebService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebServiceBasicImpl.class);
     private static URI LOCATION_URI;
     private final RestTemplate restTemplate;
     private final WebProperties webProperties;
@@ -31,31 +36,57 @@ public class WebServiceBasicImpl extends ForecastServiceUtility implements WebSe
     }
 
     @Override
-    public WebService addCitiesToModel(Model model) {
-        ResponseEntity<LocationDto[]> response = restTemplate.getForEntity(LOCATION_URI, LocationDto[].class);
-        Set<ComboOption> locationsComboOptions = getLocationsComboOptions(requireNonNull(response.getBody()));
+    public WebService addLocationsToModel(Model model) {
+        try {
 
-        model.addAttribute("locationsOptions", locationsComboOptions);
+            ResponseEntity<LocationDto[]> response = restTemplate.getForEntity(LOCATION_URI, LocationDto[].class);
+            Set<ComboOption> locationsComboOptions = getLocationsComboOptions(requireNonNull(response.getBody()));
+
+            model.addAttribute("locationsOptions", locationsComboOptions);
+
+        } catch (Exception e) {
+            /*
+             * Basic exception handling to provide fallback functionality
+             */
+            addErrorAttributes(
+                    "location-service is not available",
+                    model,
+                    getStackTrace(e)
+            );
+        }
 
         return this;
     }
 
     @Override
-    public WebService addForecastToModel(Model model) {
+    public WebService addWeatherToModel(Model model) {
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 
-        model.addAttribute("showWeatherDetails", isFalse(emptyLocation));
         model.addAttribute("selectedLocation", selectedLocation);
 
         if(emptyLocation) {
+            model.addAttribute("showWeatherDetails", FALSE);
             return this;
         }
 
-        URI weatherURI = webProperties.getWeatherURI(selectedLocation);
-        ResponseEntity<OpenWeatherDto> response = restTemplate.getForEntity(weatherURI, OpenWeatherDto.class);
+        try {
 
-        model.addAttribute("weatherDto", requireNonNull(response.getBody()));
+            URI weatherURI = webProperties.getWeatherURI(selectedLocation);
+            ResponseEntity<OpenWeatherDto> response = restTemplate.getForEntity(weatherURI, OpenWeatherDto.class);
+            model.addAttribute("weatherDto", requireNonNull(response.getBody()));
+            model.addAttribute("showWeatherDetails", TRUE);
+
+        } catch (Exception e) {
+            /*
+             * Basic exception handling to provide fallback functionality
+             */
+            addErrorAttributes(
+                    "weather-service is not available",
+                    model,
+                    getStackTrace(e)
+            );
+        }
 
         return this;
     }
@@ -63,5 +94,14 @@ public class WebServiceBasicImpl extends ForecastServiceUtility implements WebSe
     @Override
     public String template(String templateName) {
         return templateName;
+    }
+
+    private void addErrorAttributes(String errorMessage, Model model, String errorStackTrace) {
+        LOGGER.error(errorMessage);
+
+        model.addAttribute("isError", TRUE);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorStackTrace", errorStackTrace);
+        model.addAttribute("showWeatherDetails", FALSE);
     }
 }
