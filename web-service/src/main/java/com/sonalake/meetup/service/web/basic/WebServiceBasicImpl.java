@@ -1,7 +1,7 @@
 package com.sonalake.meetup.service.web.basic;
 
-import com.sonalake.meetup.service.web.ForecastService;
 import com.sonalake.meetup.service.web.WebProperties;
+import com.sonalake.meetup.service.web.WebService;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
@@ -20,7 +20,7 @@ import static org.apache.commons.lang.BooleanUtils.isFalse;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 @AllArgsConstructor
-public class ForecastServiceBasicImpl extends ForecastServiceUtility implements ForecastService {
+public class WebServiceBasicImpl extends ForecastServiceUtility implements WebService {
     private static URI LOCATION_URI;
     private final RestTemplate restTemplate;
     private final WebProperties webProperties;
@@ -31,7 +31,7 @@ public class ForecastServiceBasicImpl extends ForecastServiceUtility implements 
     }
 
     @Override
-    public ForecastService addCitiesToModel(Model model) {
+    public WebService addCitiesToModel(Model model) {
         ResponseEntity<LocationDto[]> response = restTemplate.getForEntity(LOCATION_URI, LocationDto[].class);
         Set<ComboOption> locationsComboOptions = getLocationsComboOptions(requireNonNull(response.getBody()));
 
@@ -41,7 +41,7 @@ public class ForecastServiceBasicImpl extends ForecastServiceUtility implements 
     }
 
     @Override
-    public ForecastService addForecastToModel(Model model) {
+    public WebService addForecastToModel(Model model) {
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 

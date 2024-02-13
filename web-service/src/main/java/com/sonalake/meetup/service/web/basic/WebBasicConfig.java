@@ -1,7 +1,7 @@
 package com.sonalake.meetup.service.web.basic;
 
-import com.sonalake.meetup.service.web.ForecastService;
 import com.sonalake.meetup.service.web.WebProperties;
+import com.sonalake.meetup.service.web.WebService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class WebBasicConfig {
     }
 
     @Bean
-    public ForecastService forecastService(RestTemplate restTemplate, WebProperties webProperties) {
-        return new ForecastServiceBasicImpl(restTemplate, webProperties);
+    public WebService webService(RestTemplate restTemplate, WebProperties webProperties) {
+        return new WebServiceBasicImpl(restTemplate, webProperties);
     }
 }

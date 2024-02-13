@@ -1,7 +1,7 @@
 package com.sonalake.meetup.service.web.cloud.feign;
 
-import com.sonalake.meetup.service.web.ForecastService;
 import com.sonalake.meetup.service.web.WebProperties;
+import com.sonalake.meetup.service.web.WebService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 public class WebFeignConfig {
 
     @Bean
-    public ForecastService forecastService(LocationFeignClient locationFeignClient,
-                                           WeatherFeignClient weatherFeignClient) {
-        return new ForecastServiceFeignImpl(locationFeignClient, weatherFeignClient);
+    public WebService webService(LocationFeignClient locationFeignClient,
+                                      WeatherFeignClient weatherFeignClient) {
+        return new WebServiceFeignImpl(locationFeignClient, weatherFeignClient);
     }
 
     @Bean

@@ -1,6 +1,6 @@
 package com.sonalake.meetup.service.web.cloud.feign;
 
-import com.sonalake.meetup.service.web.ForecastService;
+import com.sonalake.meetup.service.web.WebService;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
@@ -20,14 +20,14 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 
 @EnableFeignClients
 @AllArgsConstructor
-public class ForecastServiceFeignImpl extends ForecastServiceUtility implements ForecastService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ForecastServiceFeignImpl.class);
+public class WebServiceFeignImpl extends ForecastServiceUtility implements WebService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebServiceFeignImpl.class);
 
     private final LocationFeignClient locationFeignClient;
     private final WeatherFeignClient webFeignClient;
 
     @Override
-    public ForecastService addCitiesToModel(Model model) {
+    public WebService addCitiesToModel(Model model) {
         LocationDto[] locations = locationFeignClient.getLocations();
 
         if(isNull(locations)) {
@@ -43,7 +43,7 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
     }
 
     @Override
-    public ForecastService addForecastToModel(Model model) {
+    public WebService addForecastToModel(Model model) {
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 
@@ -55,6 +55,7 @@ public class ForecastServiceFeignImpl extends ForecastServiceUtility implements 
         }
 
         OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
+        System.out.println("@@@ after getWeather");
 
         model.addAttribute("weatherDto", weather);
         model.addAttribute("showWeatherDetails", weather.isOk());
