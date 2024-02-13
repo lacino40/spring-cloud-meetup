@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/weather")
@@ -28,7 +25,9 @@ public class WeatherController {
                 .create("open-weather-api")
                 .run(
                         () -> requestOpenWeatherApi(query),
-                        OpenWeatherDto::withThrowable
+                        throwable -> {
+                            throw new RuntimeException(throwable);
+                        }
                 );
     }
 
@@ -36,9 +35,9 @@ public class WeatherController {
         try {
 
             return weatherService.requestOpenWeatherApi(query);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error("open-weather-api is not available for query {}: {}", query, e.getMessage());
-            throw new UncheckedIOException(e);
+            return new OpenWeatherDto().withError();
         }
     }
 }
