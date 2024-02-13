@@ -1,2 +1,18 @@
 server:
   port: 8086
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: location-service
+          uri: lb://location-service
+          predicates:
+            - Path=/location/**
+        - id: weather-service
+          uri: lb://weather-service
+          predicates:
+            - Path=/weather/**
