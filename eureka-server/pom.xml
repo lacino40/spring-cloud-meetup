@@ -10,12 +10,13 @@
     </parent>
 
     <artifactId>eureka-server</artifactId>
-
+    <!-- Discovery client -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+        <!-- Zipkin server -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
