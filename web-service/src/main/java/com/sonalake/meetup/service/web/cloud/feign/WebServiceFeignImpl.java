@@ -13,9 +13,9 @@ import org.springframework.ui.Model;
 
 import java.util.Set;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.Objects.isNull;
-import static org.apache.commons.lang.BooleanUtils.isFalse;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 @EnableFeignClients
@@ -47,17 +47,17 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
         String selectedLocation = (String) model.asMap().get("selectedLocation");
         boolean emptyLocation = isBlank(selectedLocation);
 
-        model.addAttribute("showWeatherDetails", isFalse(emptyLocation));
         model.addAttribute("selectedLocation", selectedLocation);
 
         if(emptyLocation) {
+            model.addAttribute("showWeatherDetails", FALSE);
             return this;
         }
 
         OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
 
         model.addAttribute("weatherDto", weather);
-        model.addAttribute("showWeatherDetails", weather.isOk());
+        model.addAttribute("showWeatherDetails", TRUE);
 
         if(weather.isError()) {
             addErrorAttributes(
@@ -81,5 +81,6 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
         model.addAttribute("isError", TRUE);
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("errorStackTrace", errorStackTrace);
+        model.addAttribute("showWeatherDetails", FALSE);
     }
 }
