@@ -5,7 +5,7 @@ the principles of Spring Cloud and how it eases the challenges of building compl
 
 Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems. 
 In this project, you will find examples of how to use these tools practically. The project 
-encapsulates multiple sub-projects each demonstrating a unique feature of Spring Cloud - including distributed configuration, 
+encapsulates multiple subprojects each demonstrating a unique feature of Spring Cloud - including distributed configuration, 
 service discovery, circuit breakers, routing, micro-proxy and more.
 
 Regardless of your experience level with Spring Cloud, this project serves as an education resource to learn and understand 
@@ -60,7 +60,7 @@ Web shows simple page with selection of cities to show weather forecast. Result 
 
 The application can be accessed locally at `http://localhost:8080/forecast`
 
-![scrren-shot](/readme/screen-1.png)
+![screen-shot](/readme/screen-1.png)
 
 
 > **NOTE:** To ensure the proper experience using this demo, it is **highly recommended** to run modules in the order they are presented bellow
@@ -125,7 +125,7 @@ To generate and obtain this API key:
 4. You will see your unique API Key, or you can generate a new one if you prefer. This key is alphanumeric.
 
 However, if `service.weather.open-weather.api-key` is not provided or invalid, the weather service has fail-safe 
-mechanism implemented. It will fallback to use mock data for weather information. This mock data is stored in a file 
+mechanism implemented. It will fall back to use mock data for weather information. This mock data is stored in a file 
 named `open-weather-mock.json`, which is part of application's resources. This file contains pre-set, static weather 
 data.
 
@@ -147,8 +147,7 @@ Open `wev-service` module.
 
 where
 
-`service.web.config` -  is used to specify the configuration mode web service. There are three valid types that this 
-option can take:
+`service.web.config` -  is used to specify the configuration mode of web service. There are three valid types:
 
 1. `basic` this is a basic mode that uses MVC approach 
 2. `feign` in this mode, HTTP requests are handled by Spring's Feign library, thereby enhancing the process of HTTP-based 
