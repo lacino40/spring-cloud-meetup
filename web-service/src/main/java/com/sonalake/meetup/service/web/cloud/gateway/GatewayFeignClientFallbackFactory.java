@@ -4,13 +4,17 @@ import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.WeatherDto;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
+import java.util.LinkedHashSet;
+
+import static java.util.LinkedHashSet.newLinkedHashSet;
+
 public class GatewayFeignClientFallbackFactory implements FallbackFactory<GatewayFeignClient> {
     @Override
     public GatewayFeignClient create(Throwable cause) {
         return new GatewayFeignClient() {
             @Override
-            public LocationDto[] getLocations() {
-                return null;
+            public LinkedHashSet<LocationDto> getLocations() {
+                return newLinkedHashSet(0);
             }
 
             @Override
