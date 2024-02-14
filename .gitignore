@@ -38,3 +38,9 @@ build/
 .DS_Store
 /.idea/
 /.run/ConfigServerApplication.run.xml
+/.run/EurekaServerApplication.run.xml
+/.run/GatewayServiceApplication.run.xml
+/.run/LocationServiceApplication.run.xml
+/.run/WeatherServiceApplication.run.xml
+/.run/WeatherServiceApplication-2.run.xml
+/.run/WebServiceApplication.run.xml
