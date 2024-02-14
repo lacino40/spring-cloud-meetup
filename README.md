@@ -53,4 +53,4 @@ latency problems in service architectures.
 
 ## Setup and Usage
 ### demo web application
-[Example Image](https://github.com/lacino40/spring-cloud-meetup/blob/main/readme/cloud.png)
+![Example Image](/readme/screen-1.png)
