@@ -44,3 +44,4 @@ build/
 /.run/WeatherServiceApplication.run.xml
 /.run/WeatherServiceApplication-2.run.xml
 /.run/WebServiceApplication.run.xml
+/.run/Zipkin.run.xml
