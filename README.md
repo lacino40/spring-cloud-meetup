@@ -52,5 +52,12 @@ latency problems in service architectures.
 
 
 ## Setup and Usage
-### demo web application
-![Example Image](/readme/screen-1.png)
+### Demo web application
+Web shows simple page with selection of cities to show weather forecast. Result is represented as card with live weather data.
+- `Location Selection` - dropdown menu allowing users to select a location for which corresponding weather information will be displayed
+- `Weather Display` - section for displaying weather information fetched from the backend services. It displays the name, 
+   time, weather icon, temperature, and "feels like" temperature. There's also a marker for indicating if the weather data is mocked.
+
+The application can be accessed locally at `http://localhost:8080/forecast`
+
+![scrren-shot](/readme/screen-1.png)
