@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toCollection;
 
-public abstract class ForecastServiceUtility {
+public abstract class WebServiceUtility {
 
     protected Set<ComboOption> getLocationsComboOptions(LocationDto[] locationDTOs) {
         Set<LocationDto> locations = Arrays

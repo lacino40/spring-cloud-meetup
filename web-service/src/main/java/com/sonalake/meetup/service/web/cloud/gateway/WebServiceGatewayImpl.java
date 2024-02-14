@@ -4,7 +4,7 @@ import com.sonalake.meetup.service.web.WebService;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.WeatherDto;
-import com.sonalake.meetup.service.web.util.ForecastServiceUtility;
+import com.sonalake.meetup.service.web.util.WebServiceUtility;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 
 @EnableFeignClients
 @AllArgsConstructor
-public class WebServiceGatewayImpl extends ForecastServiceUtility implements WebService {
+public class WebServiceGatewayImpl extends WebServiceUtility implements WebService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebServiceGatewayImpl.class);
 
     private final GatewayFeignClient gatewayFeignClient;

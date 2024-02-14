@@ -5,7 +5,7 @@ import com.sonalake.meetup.service.web.WebService;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
 import com.sonalake.meetup.service.web.dto.WeatherDto;
-import com.sonalake.meetup.service.web.util.ForecastServiceUtility;
+import com.sonalake.meetup.service.web.util.WebServiceUtility;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang.exception.ExceptionUtils.getStackTrace;
 
 @AllArgsConstructor
-public class WebServiceBasicImpl extends ForecastServiceUtility implements WebService {
+public class WebServiceBasicImpl extends WebServiceUtility implements WebService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebServiceBasicImpl.class);
     private static URI LOCATION_URI;
     private final RestTemplate restTemplate;
