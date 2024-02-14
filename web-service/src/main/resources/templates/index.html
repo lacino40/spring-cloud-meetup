@@ -47,6 +47,12 @@
             <input type="submit" value="Forecast" class="button sonalake-bg-color">
         </form>
     </div>
+    <!--
+        Configuration type
+    -->
+    <div class="config-type-label sonalake-color">
+        <span th:text="${@systemProperties['service.web.config']}" class="service-tagline"></span>
+    </div>
 </div>
 
 <!--
