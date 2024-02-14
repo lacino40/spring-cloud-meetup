@@ -60,7 +60,7 @@ Web shows simple page with selection of cities to show weather forecast. Result 
 
 The application can be accessed locally at `http://localhost:8080/forecast`
 
-![screen-shot](/readme/screen-1.png)
+![screen-shot](/web-service/src/main/resources/static/img/readme/screen-1.png)
 
 
 > **NOTE:** To ensure the proper experience using this demo, it is **highly recommended** to run modules in the order they are presented bellow
