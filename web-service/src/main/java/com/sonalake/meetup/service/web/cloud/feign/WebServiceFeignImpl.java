@@ -3,7 +3,7 @@ package com.sonalake.meetup.service.web.cloud.feign;
 import com.sonalake.meetup.service.web.WebService;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
-import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
+import com.sonalake.meetup.service.web.dto.WeatherDto;
 import com.sonalake.meetup.service.web.util.ForecastServiceUtility;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -54,7 +54,7 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
             return this;
         }
 
-        OpenWeatherDto weather = webFeignClient.getWeather(selectedLocation);
+        WeatherDto weather = webFeignClient.getWeather(selectedLocation);
 
         model.addAttribute("weatherDto", weather);
         model.addAttribute("showWeatherDetails", TRUE);

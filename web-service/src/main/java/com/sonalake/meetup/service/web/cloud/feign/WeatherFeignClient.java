@@ -1,6 +1,6 @@
 package com.sonalake.meetup.service.web.cloud.feign;
 
-import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
+import com.sonalake.meetup.service.web.dto.WeatherDto;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,5 +11,5 @@ public interface WeatherFeignClient {
 
     @LoadBalanced
     @GetMapping("/weather")
-    OpenWeatherDto getWeather(@RequestParam String query);
+    WeatherDto getWeather(@RequestParam String query);
 }

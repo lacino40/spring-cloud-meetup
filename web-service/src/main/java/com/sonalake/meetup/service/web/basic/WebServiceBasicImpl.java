@@ -4,7 +4,7 @@ import com.sonalake.meetup.service.web.WebProperties;
 import com.sonalake.meetup.service.web.WebService;
 import com.sonalake.meetup.service.web.dto.ComboOption;
 import com.sonalake.meetup.service.web.dto.LocationDto;
-import com.sonalake.meetup.service.web.dto.OpenWeatherDto;
+import com.sonalake.meetup.service.web.dto.WeatherDto;
 import com.sonalake.meetup.service.web.util.ForecastServiceUtility;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -73,7 +73,7 @@ public class WebServiceBasicImpl extends ForecastServiceUtility implements WebSe
         try {
 
             URI weatherURI = webProperties.getWeatherURI(selectedLocation);
-            ResponseEntity<OpenWeatherDto> response = restTemplate.getForEntity(weatherURI, OpenWeatherDto.class);
+            ResponseEntity<WeatherDto> response = restTemplate.getForEntity(weatherURI, WeatherDto.class);
             model.addAttribute("weatherDto", requireNonNull(response.getBody()));
             model.addAttribute("showWeatherDetails", TRUE);
 

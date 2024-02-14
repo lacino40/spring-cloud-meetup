@@ -8,7 +8,7 @@ import static java.util.Objects.nonNull;
 import static org.apache.commons.lang.exception.ExceptionUtils.getStackTrace;
 
 @Data
-public class OpenWeatherDto {
+public class WeatherDto {
     private Weather displayWeather;
     private Main main;
     private Wind wind;
@@ -28,7 +28,7 @@ public class OpenWeatherDto {
      * @param cause the throwable object to get the stack trace from
      * @return the OpenWeatherDto object
      */
-    public OpenWeatherDto withThrowable(String errorServiceName, Throwable cause) {
+    public WeatherDto withThrowable(String errorServiceName, Throwable cause) {
         setError(
             Error.from(errorServiceName, getStackTrace(cause))
         );
