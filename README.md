@@ -125,9 +125,9 @@ To generate and obtain this API key:
 4. You will see your unique API Key, or you can generate a new one if you prefer. This key is alphanumeric.
 
 However, if `service.weather.open-weather.api-key` is not provided or invalid, the weather service has fail-safe 
-mechanism implemented. It will fall back to use mock data for weather information. This mock data is stored in a file 
+mechanism implemented. It will fallback to use mock data for weather information. This mock data is stored in a file 
 named `open-weather-mock.json`, which is part of application's resources. This file contains pre-set, static weather 
-data that is used for when live data can't be retrieved.
+data.
 
 ### Run Gateway service
 Open `gateway-service` module.
