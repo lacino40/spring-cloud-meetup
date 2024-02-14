@@ -61,3 +61,99 @@ Web shows simple page with selection of cities to show weather forecast. Result 
 The application can be accessed locally at `http://localhost:8080/forecast`
 
 ![scrren-shot](/readme/screen-1.png)
+
+
+> **NOTE:** To ensure the proper experience using this demo, it is **highly recommended** to run modules in the order they are presented bellow
+
+### Run Zipkin server
+Open `zipkin-server` module.
+
+- execute the `run.bat` script. This should start your Zipkin server packed as jar file under **/lib** folder.
+- access at `http://localhost:9411`
+
+### Run Discovery server
+Open `eureka-server` module.
+
+- build the project: `mvn clean install`
+- run the server `java -jar target/eureka-server-1.0-SNAPSHOT.jar`
+- access at `http://localhost:8761`
+
+### Run Configuration server
+Open `config-server` module.
+
+- build the project: `mvn clean install`
+- run the server `java -jar target/config-server-1.0-SNAPSHOT.jar`
+- access at `http://localhost:8888/<config-name-under-configuration-store>/default`
+  
+  example `http://localhost:8888/location-service/default`
+
+### Run Location service
+Open `location-service` module.
+
+- build the project: `mvn clean install`
+- run the service `java -jar target/location-service-1.0-SNAPSHOT.jar`
+- access at `http://localhost:8082/location`
+
+The list of locations is flexible and can be altered. Navigate to the `configuration-storage` folder in the project's 
+root directory and open file `location-service.yml`. Modify the items under the `locations` key in the YAML file, where
+1. `id` unique identifier used to distinguish between different items in this list. Importantly, the 
+   id is also used for ordering the locations. When the list of locations is retrieved, it's sorted in ascending 
+   order based on the id.
+2. `name` name of the location
+3. `query` string value used when searching for data related to the specified location. 
+   For instance, 'Dublin,ie' could be used as a search query in an API fetching data about Dublin in Ireland. 
+   The 'ie' part is a country code representing Ireland.
+
+### Run Weather service
+Open `weather-service` module.
+
+- build the project: `mvn clean install`
+- run the service `java -jar target/weather-service-1.0-SNAPSHOT.jar -Dservice.weather.open-weather.api-key=<open-weather-api-key>`
+- access at `http://localhost:8086/weather?query=<location-name>,<location-country-code>`
+
+  example `http://localhost:8086/weather?query=Dublin,ie` 
+
+where
+
+`service.weather.open-weather.api-key` - is a key that stores the unique API key required to access data from the 
+OpenWeatherMap API.
+
+To generate and obtain this API key:
+1. Visit the OpenWeatherMap website at https://openweathermap.org/
+2. Create an account or log in if you already have an account
+3. On successful login, navigate to the `My API Keys` menu in the account settings. 
+4. You will see your unique API Key, or you can generate a new one if you prefer. This key is alphanumeric.
+
+However, if `service.weather.open-weather.api-key` is not provided or invalid, the weather service has fail-safe 
+mechanism implemented. It will fall back to use mock data for weather information. This mock data is stored in a file 
+named `open-weather-mock.json`, which is part of application's resources. This file contains pre-set, static weather 
+data that is used for when live data can't be retrieved.
+
+### Run Gateway service
+Open `gateway-service` module.
+
+- build the project: `mvn clean install`
+- run the service `java -jar target/gatyeway-service-1.0-SNAPSHOT.jar`
+- access at `http://localhost:8086/<endpoit-name>`
+
+examples `http://localhost:8086/weather?query=Dublin,ie` or `http://localhost:8086/location`
+
+### Run Web service
+Open `wev-service` module.
+
+- build the project: `mvn clean install`
+- run the service `java -jar target/web-service-1.0-SNAPSHOT.jar -Dservice.web.config=<configuration-type>`
+- access at `http://localhost:8080/forecast`
+
+where
+
+`service.web.config` -  is used to specify the configuration mode web service. There are three valid types that this 
+option can take:
+
+1. `basic` this is a basic mode that uses MVC approach 
+2. `feign` in this mode, HTTP requests are handled by Spring's Feign library, thereby enhancing the process of HTTP-based 
+    microservices communication
+3. `gateway` In this mode, service accesses an API Gateway
+
+If `service.web.config` option is not clearly defined, or if the set value doesn't correlate with any of the recognized modes, 
+the system automatically falls back to the `basic` mode.
