@@ -15,7 +15,6 @@ import java.util.Set;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static java.util.Objects.isNull;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 @EnableFeignClients
@@ -28,9 +27,9 @@ public class WebServiceFeignImpl extends ForecastServiceUtility implements WebSe
 
     @Override
     public WebService addLocationsToModel(Model model) {
-        LocationDto[] locations = locationFeignClient.getLocations();
+        Set<LocationDto> locations = locationFeignClient.getLocations();
 
-        if(isNull(locations)) {
+        if(locations.isEmpty()) {
             addErrorAttributes("location-service is not available", model, null);
             return this;
         }
