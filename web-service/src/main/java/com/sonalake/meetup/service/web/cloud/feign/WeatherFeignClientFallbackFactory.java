@@ -8,8 +8,6 @@ public class WeatherFeignClientFallbackFactory implements FallbackFactory<Weathe
     public WeatherFeignClient create(Throwable cause) {
         return query ->
                 new OpenWeatherDto()
-                        .withThrowable(
-                                "open-weather-api",
-                                cause);
+                        .withThrowable("open-weather-api", cause);
     }
 }
