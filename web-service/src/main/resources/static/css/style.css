@@ -13,6 +13,12 @@ body {
     background-size: 490px;
 }
 
+.config-type-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 .logo-section {
     display: flex;
     align-items: center;
