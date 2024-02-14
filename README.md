@@ -1,4 +1,3 @@
-# spring-cloud-meetup
 ## Description
 This project is a demo for Spring Cloud, showcasing its set of features that make microservice development easier 
 and more manageable. It aims to simulate a real-world application scenario, enabling users to better understand 
@@ -54,4 +53,4 @@ latency problems in service architectures.
 
 ## Setup and Usage
 ### demo web application
-[Example Image](/sonalake.png)
+
