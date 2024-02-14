@@ -6,14 +6,15 @@ import com.sonalake.meetup.service.web.dto.LocationDto;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toCollection;
 
 public abstract class ForecastServiceUtility {
 
     protected Set<ComboOption> getLocationsComboOptions(LocationDto[] locationDTOs) {
-        Set<LocationDto> locations = Arrays.stream(locationDTOs).collect(Collectors.toSet());
+        Set<LocationDto> locations = Arrays
+                                           .stream(locationDTOs)
+                                            .collect(toCollection(LinkedHashSet::new));
 
         return getLocationsComboOptions(locations);
     }
