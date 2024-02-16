@@ -52,6 +52,15 @@ latency problems in service architectures.
 
 
 ## Setup and Usage
+### Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- `Java Development Kit (JDK) version 21`
+- `Zipkin version 3.0.5 or later`. Download the Zipkin jar file and copy it into the `zipkin-server/lib` folder
+
+Project uses `Spring Boot version 3.2.2` and `Spring Cloud Dependencies version 2023.0.0`
+
 ### Demo web application
 Web shows simple page with selection of cities to show weather forecast. Result is represented as card with live weather data.
 - `Location Selection` - dropdown menu allowing users to select a location for which corresponding weather information will be displayed
@@ -156,3 +165,14 @@ where
 
 If `service.web.config` option is not clearly defined, or if the set value doesn't correlate with any of the recognized modes, 
 the system automatically falls back to the `basic` mode.
+
+### Links
+
+#### Spring Cloud Family
+https://spring.io/projects/spring-cloud
+
+#### Zipkin 
+https://zipkin.io/
+
+#### Open Weather
+https://openweathermap.org/
