@@ -54,10 +54,11 @@ latency problems in service architectures.
 ## Setup and Usage
 ### Prerequisites
 
-Before you begin, ensure you have met the following requirements:
+Before you begin, ensure you have met the following requirements
 
 - `Java Development Kit (JDK) version 21`
-- `Zipkin version 3.0.5 or later`. Download the Zipkin jar file and copy it into the `zipkin-server/lib` folder
+- `Zipkin version 3.0.5 or later`. Project already contains zipkin binaries. However, if required, download the Zipkin jar 
+   file and copy it into the `zipkin-server/lib` folder (see links bellow).
 
 Project uses `Spring Boot version 3.2.2` and `Spring Cloud Dependencies version 2023.0.0`
 
