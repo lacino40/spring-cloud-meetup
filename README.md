@@ -34,10 +34,10 @@ The `gateway-service` module acts as the entry point to our system in the contex
 on the edge of the network to handle client requests
 
 ### location-service
-The `gateway-service` module provides an endpoint to fetch list of locations/cities for purposes of demo application. 
+The `location-service` module provides an endpoint to fetch list of locations/cities for purposes of demo application. 
 
 ### weather-service
-The `gateway-service` module provides an endpoint to get detail weather data for selected location/city for purposes of 
+The `weather-service` module provides an endpoint to get detail weather data for selected location/city for purposes of 
 demo application. Also, it requests remote service called open-weather-map to retrieve live weather data.
 
 ### web-service
